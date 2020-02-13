@@ -12,9 +12,12 @@ visTree(rpart_model)
 
 
 fancyRpartPlot(rpart_model)
+
 rpart_result <- predict(rpart_model, newdata = valid[,!colnames(valid) %in% c("quality")], type='class')
+rpart_result_proba <- predict(rpart_model, newdata = valid[,!colnames(valid) %in% c("quality")], type ="prob")
 
+rpart_result_proba
 
-confusionMatrix(rpart_result, valid$quality)
+confusionMatrix(rpart_result, valid$quality)  # 0.586
 
 varImp(rpart_model) %>% kable()
