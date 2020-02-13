@@ -23,10 +23,10 @@ parameters <- list(
   alpha              = 0,       
   
   # Task Parameters
-  objective          = "multi:softprob",   # default = "reg:linear" "softmax"
-  eval_metric        = "merror",
+  objective          = "multi:softmax",   # default = "reg:linear" , "softmax", softprob
+  eval_metric        = "merror",          # merror , logloss
   num_class          = 7,
-  seed               = 1,               # reproducability seed
+  seed               = 1,                 # reproducability seed
   tree_method        = "hist",
   grow_policy        = "lossguide"
 )
@@ -36,8 +36,10 @@ parameters <- list(
 xgb_model <- xgb.train(parameters, data.train, nrounds = 100)
 
 
-xgb_pred <- predict(xgb_model, data.valid, )
+xgb_pred <- predict(xgb_model, data.valid)
 xgb_pred
+
+# softpob으로 설정하고 matrix 아래 코드를 실행해주면 클래스별로 prob을 확인할 수 있다.
 matrix(xgb_pred, ncol = 7, byrow = T)
 
 

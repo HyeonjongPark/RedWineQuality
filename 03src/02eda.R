@@ -19,10 +19,14 @@
 ## skim would give you the outlook of the dataset, number of observations, number of columns, the range of the variables, number of missing/ unique values, the histogram, etc.
 
 wine = read_csv("./01original-data/winequality-red.csv")
+
 wine %>% head
 wine %>% skim() %>% kable()
 
-
+library(data.table)
+wine2 = fread("./01original-data/winequality-red.csv")
+wine2 = as.tibble(wine)
+wine2 %>% skim() %>% kable()
 
 ## Corrplot would give you a overview of the correlation between all the variables. It is better to know the relationship in the very beginning of your analysis.
 
