@@ -30,7 +30,7 @@ h2o.model <- h2o.deeplearning(x = setdiff(names(train), c("quality")),
                               
                               standardize = TRUE,         # standardize data
                               
-                              hidden = c(100, 100),       # 2 layers of 00 nodes each
+                              hidden = c(50,50,50,50),       # 2 layers of 00 nodes each
                               
                               rate = 0.05,                # learning rate
                               
@@ -41,6 +41,8 @@ h2o.model <- h2o.deeplearning(x = setdiff(names(train), c("quality")),
 
 
 h2o.predictions <- h2o.predict(h2o.model, h2o.valid) %>% as.data.frame()
+
+h2o.predictions
 
 confusionMatrix(h2o.predictions$predict, valid$quality)
 
